@@ -39,6 +39,25 @@ ollama pull --insecure http://localhost:9200/library/<image>:<tag>
 p.S. Please give a thumbs up on this [PR](https://github.com/ollama/ollama/pull/5241), so that the default behavior of the ollama client can be overwrite to use the cache. 
 Will look nicer and work better.
 
+## Architecture
+
+This proxy is based on a worker architecture. It has a worker pool, that can be configured via the `NUM_DOWNLOAD_WORKERS` environment variable. 
+When a request comes in, the proxy will check if the file is already in the cache. If not, it will mark it as queued and serve the request from the upstream. 
+In the background the worker checks the queue and downloads the file. Going forward, the file will be served from the local cache, not upstream anymore
+
+## Configuration options (via environment variables)
+
+| Environment Variable | Description                                                                                                      | Default                       |
+|----------------------|------------------------------------------------------------------------------------------------------------------|-------------------------------|
+| `PORT` | The port the proxy listens on                                                                                    | `9200`                        |
+| `DUMP_UPSTREAM_REQUESTS` | If the proxy should dump the upstream requests                                                                   | `false`                       |
+| `CACHE_DIR` | Directory where the cache is stored                                                                              | `./cache_dir`                 |
+| `NUM_DOWNLOAD_WORKERS` | Number of workers that download the files                                                                        | 1                             |
+| `MANIFEST_LIFETIME` | The lifetime of the model manifest. These change from time to time on the registry, and we want to get updates   | `240h` / 10 days              |
+| `UPSTREAM_ADDRESS` | The upstream ollama registry                                                                                     | `https://registry.ollama.ai/` |
+| `LOG_LEVEL` | The log level of the proxy                                                                                       | `info`                        |
+| `LOG_FORMAT_JSON` | If the log should be in json format. This is nice for external log tools. (e.g. when you run this in kubernetes) | `false`                       |
+
 ## Contributing
 
 Feel free to create issues and PRs. The project is tiny as of now, so no dedicated guidelines. 
