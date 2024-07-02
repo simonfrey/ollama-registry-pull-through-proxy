@@ -4,6 +4,8 @@ The [ollama](https://ollama.com/) registry is somewhat a docker registry, but al
 Hence, normal docker pull through caches do not work. This project aims to pull through cache, that you can 
 deploy in your local network, to speed up the pull times of the ollama registry.
 
+[![Demo video of the tool on YouTube](https://img.youtube.com/vi/7_nlWlhrqNw/0.jpg)](https://www.youtube.com/watch?v=7_nlWlhrqNw)
+
 ## Usage
 
 ### 1. Start the cache
