@@ -23,4 +23,4 @@ jobs:
         with:
           image_name: ${{ github.repository }}
           github_token: ${{ secrets.GCR_REGISTRY_TOKEN }}
-          image_tag: ${{ github.sha }} latest
+          image_tag: latest
