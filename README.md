@@ -18,7 +18,10 @@ deploy in your local network, to speed up the pull times of the ollama registry.
 
 #### Docker
 
-1. Run via docker `docker run -p 9200:9200 -v ./cache_dir_docker:/pull-through-cache d9abbf62c6ec`
+1. Run via docker 
+    ```
+    docker run -p 9200:9200 -v ./cache_dir_docker:/pull-through-cache ghcr.io/beans-bytes/ollama-registry-pull-through-proxy:latest
+    ```
 2. This mounts the local folder `cache_dir_docker` to the cache directory of the container. This will contain ollama files.
 3. The cache will be available at http://localhost:9200`
 
