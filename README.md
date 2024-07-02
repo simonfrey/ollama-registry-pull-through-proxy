@@ -6,7 +6,7 @@ deploy in your local network, to speed up the pull times of the ollama registry.
 
 ## Usage
 
-### Start the cache
+### 1. Start the cache
 
 #### Golang
 
@@ -19,14 +19,18 @@ deploy in your local network, to speed up the pull times of the ollama registry.
 #### Docker
 
 1. Run via docker `docker run -p 9200:9200 -v ./cache_dir_docker:/pull-through-cache d9abbf62c6ec`
-   2. This mounts the local folder `cache_dir_docker` to the cache directory of the container. This will contain ollama files.
-5. The cache will be available at http://localhost:9200`
+2. This mounts the local folder `cache_dir_docker` to the cache directory of the container. This will contain ollama files.
+3. The cache will be available at http://localhost:9200`
 
-### Use the cache
+### 2. Use the cache
 
-This is quite easy, just prepend `http://localhost:9200/library/` to the image you want to run/pull
+This is quite easy, **just prepend `http://localhost:9200/library/` to the image you want to run/pull**
 
-This `ollama pull <image>:<tag>` becomes `ollama pull --insecure http://localhost:9200/library/<image>:<tag>`
+This `ollama pull <image>:<tag>` becomes 
+```bash
+ollama pull --insecure http://localhost:9200/library/<image>:<tag>
+```
+
 **Note: As we run on a non-https endpoint we need to add the `--insecure` to the command**
 
 p.S. Please give a thumbs up on this [PR](https://github.com/ollama/ollama/pull/5241), so that the default behavior of the ollama client can be overwrite to use the cache. 
