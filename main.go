@@ -18,7 +18,7 @@ import (
 
 var cli struct {
 	Port                    int           `kong:"default='9200',env='PORT',help='port to listen on'"`
-	UpstreamAddress         string        `kong:"default='https://registry.ollama.ai/',env='ORIGIN_ADDRESS',help='upstream address to connect to. Can be IP or name, later one will be resolved'"`
+	UpstreamAddress         string        `kong:"default='https://registry.ollama.ai/',env='UPSTREAM_ADDRESS',help='upstream address to connect to. Can be IP or name, later one will be resolved'"`
 	DumpUpstreamRequests    bool          `kong:"env='DUMP_UPSTREAM_REQUESTS',help='If set to true then all upstream request and responses will be dumped to the console'"`
 	CacheDir                string        `kong:"default='./cache_dir',env='CACHE_DIR',help='What directory to use as base for the cache'"`
 	NumberOfDownloadWorkers int           `kong:"default='1',env='NUM_DOWNLOAD_WORKERS',help='Number of parallel workers to use for downloading files'"`
